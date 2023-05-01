@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<h1>Lista de categorias</h1>
+			<table>
+				<tr>
+					<td>nombre</td>
+					<td>descripción</td>
+				</tr>
+				<tr th:each="category: ${listCategory}">
+					<td th:text="${category.categoryname}"></td>
+					<td th:text="${category.description}"></td>
+				</tr>
+			</table>
+	</body>
+</html>

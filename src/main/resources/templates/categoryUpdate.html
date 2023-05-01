@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<h1>Actualizar categoria</h1>
+		<form th:action="@{/categoryUpdateSubmit}" method="post" th:object="${updateCategory}">
+			<label>Nombre</label> <br>
+			<input type="text" name="categoryname" th:value="*{categoryname}" th:fild="*{categoryname}">
+			<br>
+			<label>Descripción</label> <br>
+			<input type="text" name="description" th:value="*{description}" th:fild="*{description}">
+			<br>
+			<button type="submit">Actualizar</button>
+		</form>
+	</body>
+</html>

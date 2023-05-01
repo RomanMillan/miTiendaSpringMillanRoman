@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<h1>Actualizar modelo</h1>
+		<form th:action="@{/elementUpdateSubmit}" method="post" th:object="${updateElement}">
+			<label>Nombre Marca</label> <br>
+			<input type="text" name="key_category" th:value="*{key_category}" th:fild="*{key_category}">
+			<br>
+			<label>Nombre Modelo</label> <br>
+			<input type="text" name="elementname" th:value="*{elementname}" th:fild="*{elementname}">
+			<br>
+			<label>Descripción</label> <br>
+			<input type="text" name="description" th:value="*{description}" th:fild="*{description}">
+			<br>
+			<label>stock</label> <br>
+			<input type="text" name="stock" th:value="*{stock}" th:fild="*{stock}">
+			<br>
+			<label>Precio</label> <br>
+			<input type="text" name="price" th:value="*{price}" th:fild="*{price}">
+			<br>
+			<button type="submit">Actualizar</button>
+		</form>
+	</body>
+</html>

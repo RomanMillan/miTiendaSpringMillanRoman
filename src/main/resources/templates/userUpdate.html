@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<h1>Actualizar usuario</h1>
+		<form th:action="@{/userUpdateSubmit}" method="post" th:object="${updateUser}">
+			<label>Nombre</label> <br>
+			<input type="text" name="username" th:value="*{username}" th:fild="*{username}">
+			<label>Contraseña</label> <br>
+			<input type="password" name="password" th:value="*{password}" th:fild="*{password}">
+			<label>Nombre Real</label> <br>
+			<input type="text" name="realusername" th:value="*{realusername}" th:fild="*{realusername}">
+			<label>Correo</label> <br>
+			<input type="email" name="email" th:value="*{email}" th:fild="*{email}">
+			<br>
+			<button type="submit">Actualizar</button>
+		</form>
+	</body>
+</html>

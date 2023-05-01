@@ -2,11 +2,18 @@ package com.jacaranda.model;
 
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="userdb")
 public class User {
 
-	private String user;
+	@Id
+	private String username;
 	private String password;
-	private String name;
+	private String realusername;
 	private String email;
 	private boolean administrator;
 	
@@ -15,62 +22,63 @@ public class User {
 		super();
 	}
 
-	public User(String user, String password, String name, String email, boolean administrator) {
+	public User(String username, String password, String realusername, String email, boolean administrator) {
 		super();
-		this.user = user;
+		this.username = username;
 		this.password = password;
-		this.name = name;
+		this.realusername = realusername;
 		this.email = email;
 		this.administrator = administrator;
 	}
-
-//	getter and setter
-	public String getUser() {
-		return user;
+	
+	
+	// getter and setter
+	public String getUsername() {
+		return username;
 	}
-
-	public void setUser(String user) {
-		this.user = user;
+	
+	public void setUsername(String username) {
+		this.username = username;
 	}
-
+	
 	public String getPassword() {
 		return password;
 	}
-
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public String getName() {
-		return name;
+	
+	public String getRealusername() {
+		return realusername;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	
+	public void setRealusername(String realusername) {
+		this.realusername = realusername;
 	}
-
+	
 	public String getEmail() {
 		return email;
 	}
-
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
 	public boolean isAdministrator() {
 		return administrator;
 	}
-
+	
 	public void setAdministrator(boolean administrator) {
 		this.administrator = administrator;
 	}
-
-//	hashcode and equals
+	
+	//hashCode and equals
 	@Override
 	public int hashCode() {
-		return Objects.hash(user);
+		return Objects.hash(username);
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -80,9 +88,12 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(user, other.user);
+		return Objects.equals(username, other.username);
 	}
 	
+
+
+
 	
 	
 }

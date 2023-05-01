@@ -2,10 +2,16 @@ package com.jacaranda.model;
 
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Category {
 
-	private int id;
-	private String name;
+	@Id
+	private String categoryname;
 	private String description;
 	
 //	constructores
@@ -13,28 +19,19 @@ public class Category {
 		super();
 	}
 
-	public Category(int id, String name, String description) {
+	public Category(String categoryname, String description) {
 		super();
-		this.id = id;
-		this.name = name;
+		this.categoryname = categoryname;
 		this.description = description;
 	}
 
 //	getter and setter
-	public int getId() {
-		return id;
+	public String getCategoryname() {
+		return categoryname;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setCategoryname(String categoryname) {
+		this.categoryname = categoryname;
 	}
 
 	public String getDescription() {
@@ -45,10 +42,10 @@ public class Category {
 		this.description = description;
 	}
 
-//	hashCode and Equal
+//	hashCode and equals
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(categoryname);
 	}
 
 	@Override
@@ -60,8 +57,8 @@ public class Category {
 		if (getClass() != obj.getClass())
 			return false;
 		Category other = (Category) obj;
-		return id == other.id;
+		return Objects.equals(categoryname, other.categoryname);
 	}
-
+	
 	
 }

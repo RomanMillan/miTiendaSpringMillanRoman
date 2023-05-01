@@ -5,21 +5,21 @@
 	<title>Insert title here</title>
 	</head>
 	<body>
-		<form action="" method="post">
+		<form th:action="@{/userAddSubmit}" method="post" th:object="${newUser}">
 			<label>Nombre usuario</label>
-			<input type="text" name="username">
+			<input type="text" name="username" th:fild="*{username}">
 			<br>
 			<label>Contraseña</label>
-			<input type="password" name="password">
+			<input type="password" name="password" th:fild="*{password}">
 			<br>
-			<label>Repetir Contraseña</label>
+			<!--<label>Repetir Contraseña</label>
 			<input type="password" name="passwordR">
-			<br>
+			<br>-->
 			<label>Nombre Real</label>
-			<input type="text" name="realName">
+			<input type="text" name="realusername" th:fild="*{realusername}">
 			<br>
 			<label>Correo Electrónico</label>
-			<input type="email" name="email">
+			<input type="email" name="email" th:fild="*{email}">
 			<br>
 			<button type="submit">Registrar</button>
 		</form>

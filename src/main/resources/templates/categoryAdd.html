@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>añadir marca</title>
+	</head>
+	<body>
+		<form th:action="@{/categoryAddSubmit}" method="post" th:object="${newCategory}">
+			<label>Nombre Marca</label>
+			<input type="text" name="categoryname" th:fild="*{categoryname}">
+			<br>
+			<label>Descripción</label>
+			<input type="text" name="description" th:fild="*{description}">
+			<br>
+			<button type="submit">Añadir</button>
+		</form>
+	</body>
+</html>

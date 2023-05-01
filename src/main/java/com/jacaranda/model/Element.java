@@ -2,14 +2,20 @@ package com.jacaranda.model;
 
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="elementdb")
 public class Element {
 
-	private int id;
-	private String name;
+	@Id
+	private String elementname;
 	private String description;
-	private int strock;
+	private int stock;
 	private int price;
-	private int id_category;
+	private String key_category;
 	
 	
 //	Constructores
@@ -17,70 +23,71 @@ public class Element {
 		super();
 	}
 
-	public Element(int id, String name, String description, int strock, int price, int id_category) {
+	public Element(String elementname, String description, int stock, int price, String key_category) {
 		super();
-		this.id = id;
-		this.name = name;
+		this.elementname = elementname;
 		this.description = description;
-		this.strock = strock;
+		this.stock = stock;
 		this.price = price;
-		this.id_category = id_category;
+		this.key_category = key_category;
 	}
 
-//	getter and setter
-	public int getId() {
-		return id;
+// getter and setter
+	public String getElementname() {
+		return elementname;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+
+	public void setElementname(String elementname) {
+		this.elementname = elementname;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public String getDescription() {
 		return description;
 	}
 
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public int getStrock() {
-		return strock;
+
+	public int getStock() {
+		return stock;
 	}
 
-	public void setStrock(int strock) {
-		this.strock = strock;
+
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
+
 
 	public int getPrice() {
 		return price;
 	}
 
+
 	public void setPrice(int price) {
 		this.price = price;
 	}
 
-	public int getId_category() {
-		return id_category;
+
+	public String getKey_category() {
+		return key_category;
 	}
 
-	public void setId_category(int id_category) {
-		this.id_category = id_category;
+
+	public void setKey_category(String key_category) {
+		this.key_category = key_category;
 	}
 
-//	hashCode and equals
+// hashCode and Equals
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(elementname);
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -91,9 +98,8 @@ public class Element {
 		if (getClass() != obj.getClass())
 			return false;
 		Element other = (Element) obj;
-		return id == other.id;
+		return Objects.equals(elementname, other.elementname);
 	}
-	
-	
+
 	
 }

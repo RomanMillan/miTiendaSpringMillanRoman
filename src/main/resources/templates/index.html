@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="ISO-8859-1">
+		<meta charset="UTF-8">
 		<title>Insert title here</title>
 	</head>
 	<body>
-		<h1>Hola desde Spring</h1>
-		<span th:text="${mensaje}">i</span>
+		<h1>Lista de usuarios</h1>
+		<span th:each="user: ${listUser}">
+			<label>Nombre: </label> <span th:text="${user.user}"></span> 
+			<br>
+			<label>Contraseña: </label> <span th:text="${user.password}"></span> 
+			<br>
+			<label>Correo: </label> <span th:text="${user.email}"></span>
+			<br> 
+			<hr>
+		</span>
+		
+		
 	</body>
 </html>

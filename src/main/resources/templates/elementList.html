@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<h1>Lista de modelos</h1>
+		<table>
+			<tr>
+				<td>Marca</td>
+				<td>Modelo</td>
+				<td>descripción</td>
+				<td>Stock</td>
+				<td>Precio</td>
+			</tr>
+			<tr th:each="element: ${listElement}">
+				<td th:text="${element.key_category}"></td>
+				<td th:text="${element.elementname}"></td>
+				<td th:text="${element.description}"></td>
+				<td th:text="${element.stock}"></td>
+				<td th:text="${element.price}"></td>
+			</tr>
+		</table>
+	</body>
+</html>
