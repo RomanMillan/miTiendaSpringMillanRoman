@@ -71,4 +71,14 @@ public class UserController {
 		model.addAttribute("listUser", listUser);
 		return "userList";
 	}
+
+
+	//hacer login
+	@GetMapping("/")
+	public String isValid(Model model){
+		User userLogin = new User();
+		model.addAttribute("userLogin",userLogin);
+		return "index";
+	}
+
 }

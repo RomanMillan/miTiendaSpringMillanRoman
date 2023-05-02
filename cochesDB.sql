@@ -5,7 +5,7 @@ GRANT ALL PRIVILEGES ON `miTiendaSpringMillanRoman`.* TO 'millanRoman'@'%';
 
 CREATE TABLE miTiendaSpringMillanRoman.userdb( 
 	username VARCHAR(32), 
-	password VARCHAR(32), 
+	password VARCHAR(100), 
 	realusername VARCHAR(32), 
 	email VARCHAR(32),   
 	administrator BOOLEAN, 

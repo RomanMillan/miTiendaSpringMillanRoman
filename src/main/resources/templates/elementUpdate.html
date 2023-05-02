@@ -8,7 +8,7 @@
 		<h1>Actualizar modelo</h1>
 		<form th:action="@{/elementUpdateSubmit}" method="post" th:object="${updateElement}">
 			<label>Nombre Marca</label> <br>
-			<input type="text" name="key_category" th:value="*{key_category}" th:fild="*{key_category}">
+			<input type="text" name="key_category" th:value="*{key_category}" th:fild="*{key_category}" readonly>
 			<br>
 			<label>Nombre Modelo</label> <br>
 			<input type="text" name="elementname" th:value="*{elementname}" th:fild="*{elementname}" readonly>
