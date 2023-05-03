@@ -17,6 +17,12 @@ public class User {
 	private String email;
 	private boolean administrator;
 	
+/*userDetails
+	userDetails y 
+	nos obliga a implementar el getUsername(), get Password 
+	y otros metodos que te importa
+	*/
+	
 //	constructores
 	public User() {
 		super();
