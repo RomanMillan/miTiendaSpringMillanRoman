@@ -3,16 +3,16 @@ package com.jacaranda.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.jacaranda.model.User;
 import com.jacaranda.repository.UserRepository;
 
 @Service
-public class UserService implements UserDetailsService{
+public class UserService {
 
 	@Autowired
 	UserRepository userRepository;
@@ -46,10 +46,10 @@ public class UserService implements UserDetailsService{
 	}
 
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//		devolver el usuario 
-		return null;
-	}
+//	@Override
+//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+////		devolver el usuario 
+//		return null;
+//	}
 	
 }

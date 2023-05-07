@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jacaranda.model.Category;
 import com.jacaranda.model.Element;
+import com.jacaranda.model.User;
+import com.jacaranda.service.CategoryService;
 import com.jacaranda.service.ElementService;
 
 @Controller
@@ -20,12 +21,16 @@ public class ElementController {
 
 	@Autowired
 	ElementService elementService;
+	@Autowired
+	CategoryService categoryService;
 	
 //	añadir un elemento
-	@GetMapping("/element/add")
+	@GetMapping("/articulo/add")
 	public String elementAdd(Model model){
 		Element element = new Element();
+		List<Category> categoryList = categoryService.getCategoryList();
 		model.addAttribute("newElement",element);
+		model.addAttribute("categoryList",categoryList);
 		return "elementAdd";
 	}
 	
@@ -37,15 +42,29 @@ public class ElementController {
 	
 	
 //	borrar un elemento
-	@GetMapping("/element/delete/{elementname}")
+	@GetMapping("/articulo/delete/{elementname}")
 	public String elementDelete(Model model, @PathVariable("elementname") String elementname){
 		Element element = elementService.getElement(elementname);
-		elementService.delete(element);
-		return "elementDelete";
+		try {
+//			compruebo que existe el usuario, buscando un dato,
+//			si este no existe saltará la excepción
+			element.getElementname();
+			model.addAttribute("deleteElement", element);
+			return "elementDelete";			
+		}catch (Exception e) {
+			return "errorUser";
+		}
 	}
 	
+	@PostMapping("/elementDeleteSubmit")
+	public String elementDeleteSubmit(@ModelAttribute("deleteElement") Element element){
+		elementService.delete(element);
+		return "elementDeleted";
+	}
+	
+	
 //	actualizar un elemento
-	@GetMapping("/element/update/{elementname}")
+	@GetMapping("/articulo/update/{elementname}")
 	public String elementUpdate(Model model, @PathVariable("elementname") String elementname){
 		Element element = elementService.getElement(elementname);
 		model.addAttribute("updateElement",element);
@@ -60,7 +79,7 @@ public class ElementController {
 	
 	
 //	obtener todos los elementos
-	@GetMapping("/element/list")
+	@GetMapping("/articulo/list")
 	public String elementList(Model model){
 		List<Element> listElement = elementService.getElementList();
 		model.addAttribute("listElement", listElement);

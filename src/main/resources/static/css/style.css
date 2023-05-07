@@ -1,0 +1,87 @@
+@charset "ISO-8859-1";
+
+/* HEADER */
+
+.navbar-brand {
+	margin-left: 2rem !important;
+	font-size: 1.5rem !important;	
+}
+
+
+.welcome{
+	text-align: center;
+}
+.pruClose{
+	text-align: right;
+}
+
+/* END HEADER */
+a{
+	color: white;
+	text-decoration: none;
+/*   	margin-left: 28% !important;  */
+}
+
+.container{
+	min-height: calc(100vh - 55px - 56px) !important;
+}
+
+h1{
+	text-align: center;
+	font-size: 3.2rem !important;
+	margin-top: 3.0rem !important;
+}
+
+h3{
+	text-align: center;
+	font-size: 1.7rem !important;
+	margin-bottom: 3rem !important;
+}
+
+
+/* LOGIN */
+form{
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+/* END LOGIN */
+
+
+/* CARD */
+.card{
+	margin: 1.2rem;
+}
+
+.card:hover{
+	border-color: #00dfdf;
+	box-shadow: 2px 2px 3px #6097fd;
+}
+
+
+.card-text{
+	min-height: 5.4rem;	
+}
+
+/* END CARD */
+
+/* INDEX RG */
+
+#holi{
+    margin-top: 7%;
+    background-color: DarkTurquoise;
+    border-radius: 2rem !important;
+    margin-bottom: 5%;
+    box-shadow: 2px 2px 15px gray;
+    margin-left: 20%; 
+}
+
+/* END INDEX RG */
+
+
+.orderList{
+	border-style: none !important;
+	font-weight: bold;
+}
+

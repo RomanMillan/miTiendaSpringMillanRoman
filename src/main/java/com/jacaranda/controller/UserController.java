@@ -20,7 +20,7 @@ public class UserController {
 	UserService userService;
 	
 //	añadir usuario 
-	@GetMapping("/user/add")
+	@GetMapping("/usuario/add")
 	public String userAdd(Model model){
 		User user = new User();
 		model.addAttribute("newUser",user);
@@ -29,21 +29,52 @@ public class UserController {
 	
 	@PostMapping("/userAddSubmit")
 	public String userAddSubmit(@ModelAttribute("newUser") User user){
+		//List<User> userList = userService.getUserList();
+		User userCheck = userService.getUser(user.getUsername());
+		try {
+			userCheck.getPassword();			
+			return "errorUser";
+		} catch (Exception e) {					
+			//userService.save(user);
+			return "redirect:/useradd";						
+		}
+	}
+//	NO PUEDO AÑADIR UN USUARIO NUEVO 
+//	NO ACEPTA userService.save() en catch ni enviarlo a otro metodo
+	@GetMapping("/useradd")
+	public String userAddDB(@ModelAttribute("newUser") User user){
 		userService.save(user);
 		return "userAdded";
 	}
 	
 	
+	
 //	borrar usuario
-	@GetMapping("/user/delete/{username}")
+	@GetMapping("/usuario/delete/{username}")
 	public String userDelete(Model model, @PathVariable("username") String username){
 		User user = userService.getUser(username);
-		userService.delete(user);
-		return "userDelete";
+		try {
+//			compruebo que existe el usuario, buscando un dato,
+//			si este no existe saltará la excepción
+			user.getRealusername();
+			model.addAttribute("deleteUser", user);
+			return "userDelete";			
+		}catch (Exception e) {
+			return "errorUser";
+		}
+			
 	}
 	
+	@PostMapping("/userDeleteSubmit")
+	public String userDeleteSubmit(@ModelAttribute("deleteUser") User user){
+		userService.delete(user);
+		return "userDeleted";
+	}
+	
+	
+	
 //	actualizar usuario
-	@GetMapping("/user/update/{username}")
+	@GetMapping("/usuario/update/{username}")
 	public String userUpdate(Model model, @PathVariable("username") String username){
 		User user = userService.getUser(username);
 		model.addAttribute("updateUser",user);
@@ -57,7 +88,7 @@ public class UserController {
 	}
 	
 //	mostar usuario 
-	@GetMapping("/user/admin/{username}")
+	@GetMapping("/usuario/admin/{username}")
 	public String userAdmin(Model model, @PathVariable("username") String username){
 		User user = userService.getUser(username);
 		model.addAttribute("user",user);
@@ -65,7 +96,7 @@ public class UserController {
 	}
 	
 //	mostrar lista de usuarios
-	@GetMapping("/user/list")
+	@GetMapping("/usuario/list")
 	public String userList(Model model){
 		List<User> listUser = userService.getUserList();
 		model.addAttribute("listUser", listUser);

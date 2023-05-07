@@ -1,11 +1,11 @@
 package com.jacaranda.model;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Category {
@@ -14,35 +14,64 @@ public class Category {
 	private String categoryname;
 	private String description;
 	
+	@OneToMany(mappedBy="categoryObj")
+	private List<Element> element;
+	
 //	constructores
 	public Category() {
 		super();
 	}
 
-	public Category(String categoryname, String description) {
+	
+
+	public Category(String categoryname, String description, List<Element> element) {
 		super();
 		this.categoryname = categoryname;
 		this.description = description;
+		this.element = element;
 	}
-
-//	getter and setter
+	
+	
+	
+// getter and setter
+	
 	public String getCategoryname() {
 		return categoryname;
 	}
-
+	
+	
+	
 	public void setCategoryname(String categoryname) {
 		this.categoryname = categoryname;
 	}
-
+	
+	
+	
 	public String getDescription() {
 		return description;
 	}
-
+	
+	
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	
+	
+	public List<Element> getElement() {
+		return element;
+	}
+	
+	
+	
+	public void setElement(List<Element> element) {
+		this.element = element;
+	}
 
-//	hashCode and equals
+
+
+	//	hashCode and equals
 	@Override
 	public int hashCode() {
 		return Objects.hash(categoryname);

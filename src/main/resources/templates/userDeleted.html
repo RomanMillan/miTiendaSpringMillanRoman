@@ -1,6 +1,9 @@
-
 <!DOCTYPE html>
 <html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
@@ -15,6 +18,9 @@
 	  		<div class="col-md-3">
 		  		<span class="navbar-brand mb-0 h1">Todo Coches</span>
 	  		</div>
+	  		<div class="col-md-6 welcome">
+		  		<span class="navbar-brand mb-0 h1">Juanillo</span>
+	  		</div>
 
 	  		<div class="col-md-3 pruClose">
 		  		<img alt="purchaseImg" src="img/purchase.png">
@@ -22,33 +28,13 @@
 		  		<a href='index.jsp' class="btn btn-danger a-closeSession">Cerrar Sesión</a>
 	  		</div>
 		</nav>
-<!-- END HEADER -->
+		<!-- END HEADER -->
 		
 		<!-- MAIN -->		
 		
 		<div class="container">
 			<div class="row">
-				<h1 class="display-1">Registrar Usuario</h1>
-				<div class="form-row">
-					<form th:action="@{/userAddSubmit}" method="post" th:object="${newUser}">
-						<label for="validationServer01">Nombre usuario</label>
-						<input class="form-control" id="validationCustom01" type="text" name="username" th:fild="*{username}" required="required">
-						<br>
-						<label for="validationServer02">Contraseña</label>
-						<input class="form-control" id="validationCustom02" type="password" name="password"  th:fild="*{password}" required="required">
-						<br>
-						<label for="validationServer05">Repetir Contraseña</label>
-						<input class="form-control" id="validationCustom05" type="password2" name="password2" required="required">
-						<br>
-						<label for="validationServer03">Nombre Real</label>
-						<input class="form-control" id="validationCustom03" type="text" name="realusername"  th:fild="*{realusername}" required="required">
-						<br>
-						<label for="validationServer04">Correo Electrónico</label>
-						<input class="form-control" id="validationCustom04" type="email" name="email"  th:fild="*{email}" required="required">
-						<br>
-						<button class="btn btn-primary" type="submit">Registrar</button> 
-					</form>
-				</div>
+				<h1 class="display-1">Usuario Borrado</h1>
 			</div>
 		</div>
 				

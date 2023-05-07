@@ -2,45 +2,58 @@ package com.jacaranda.model;
 
 import java.util.Objects;
 
-public class Receipt {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
-	private int id_element;
-	private int id_order;
+@Entity
+public class Receipt {
+	
+	@Id
+	@ManyToOne
+	@JoinColumn(name="key_order")
+	private Order orderObjRec;
+	
+	@Id
+	@ManyToOne
+	@JoinColumn(name="key_element")
+	private Element elementObjRec;
 	
 //	constructores
 	public Receipt() {
 		super();
 	}
 
-	public Receipt(int id_element, int id_order) {
+	public Receipt(Order orderObjRec, Element elementObjRec) {
 		super();
-		this.id_element = id_element;
-		this.id_order = id_order;
+		this.orderObjRec = orderObjRec;
+		this.elementObjRec = elementObjRec;
 	}
 
 //	getter and setter
-	public int getId_element() {
-		return id_element;
+	public Order getOrderObjRec() {
+		return orderObjRec;
 	}
-
-	public void setId_element(int id_element) {
-		this.id_element = id_element;
+	
+	public void setOrderObjRec(Order orderObjRec) {
+		this.orderObjRec = orderObjRec;
 	}
-
-	public int getId_order() {
-		return id_order;
+	
+	public Element getElementObjRec() {
+		return elementObjRec;
 	}
-
-	public void setId_order(int id_order) {
-		this.id_order = id_order;
+	
+	public void setElementObjRec(Element elementObjRec) {
+		this.elementObjRec = elementObjRec;
 	}
-
+	
 //	hashCode and Equals
 	@Override
 	public int hashCode() {
-		return Objects.hash(id_element, id_order);
+		return Objects.hash(elementObjRec, orderObjRec);
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -50,8 +63,12 @@ public class Receipt {
 		if (getClass() != obj.getClass())
 			return false;
 		Receipt other = (Receipt) obj;
-		return id_element == other.id_element && id_order == other.id_order;
+		return Objects.equals(elementObjRec, other.elementObjRec) && Objects.equals(orderObjRec, other.orderObjRec);
 	}
+	
+		
+
+	
 	
 	
 }
