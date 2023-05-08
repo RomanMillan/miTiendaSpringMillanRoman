@@ -33,12 +33,7 @@ public class User {
 //	constructores
 	public User() {
 		super();
-		this.username = null;
-		this.password = null;
-		this.realusername = null;
-		this.email = null;
-		this.administrator = false;
-		this.order = null;
+
 	}
 
 	

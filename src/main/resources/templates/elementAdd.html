@@ -43,25 +43,21 @@
 				<div class="row">
 					<form th:action="@{/elementAddSubmit}" method="post" th:object="${newElement}">
 						<label>Nombre Marca</label>
-	
-						<select>
-							<span th:each="category: ${categoryList}">
-								<option th:text="${category.categoryname}" th:value="${category.categoryname}" th:fild="${newElement.categoryObj}" name="categoryname"></option>
-							</span>
+						<select  th:field="*{categoryObj}" name="categoryObj">
+								<option th:each="category: ${categoryList}" th:value="${category.categoryname}" th:text="${category.categoryname}"></option>
 						</select>
-			
 						<br>
 						<label>Nombre Modelo</label>
-						<input type="text" name="elementname" th:fild="*{elementname}">
+						<input type="text" name="elementname" th:field="*{elementname}">
 						<br>
 						<label>Descripción</label>
-						<input type="text" name="description" th:fild="*{description}">
+						<input type="text" name="description" th:field="*{description}">
 						<br>
 						<label>stock</label>
-						<input type="number" name="stock" th:fild="*{stock}">
+						<input type="number" name="stock" th:field="*{stock}">
 						<br>
 						<label>Precio</label>
-						<input type="number" name="price" th:fild="*{price}">
+						<input type="number" name="price" th:field="*{price}">
 						<br>
 						<button type="submit">Registrar</button>
 					</form>

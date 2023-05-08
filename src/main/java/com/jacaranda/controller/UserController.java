@@ -31,21 +31,16 @@ public class UserController {
 	public String userAddSubmit(@ModelAttribute("newUser") User user){
 		//List<User> userList = userService.getUserList();
 		User userCheck = userService.getUser(user.getUsername());
-		try {
-			userCheck.getPassword();			
+		if (userCheck != null) {
+			//Existe
 			return "errorUser";
-		} catch (Exception e) {					
-			//userService.save(user);
-			return "redirect:/useradd";						
+		}else {
+			// nO existe
+			userService.save(user);
+			return "userAdded";
 		}
 	}
-//	NO PUEDO AÑADIR UN USUARIO NUEVO 
-//	NO ACEPTA userService.save() en catch ni enviarlo a otro metodo
-	@GetMapping("/useradd")
-	public String userAddDB(@ModelAttribute("newUser") User user){
-		userService.save(user);
-		return "userAdded";
-	}
+
 	
 	
 	
@@ -53,13 +48,10 @@ public class UserController {
 	@GetMapping("/usuario/delete/{username}")
 	public String userDelete(Model model, @PathVariable("username") String username){
 		User user = userService.getUser(username);
-		try {
-//			compruebo que existe el usuario, buscando un dato,
-//			si este no existe saltará la excepción
-			user.getRealusername();
+		if(user != null) {
 			model.addAttribute("deleteUser", user);
-			return "userDelete";			
-		}catch (Exception e) {
+			return "userDelete";							
+		}else {
 			return "errorUser";
 		}
 			

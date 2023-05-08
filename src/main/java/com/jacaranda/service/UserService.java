@@ -25,7 +25,7 @@ public class UserService {
 	
 //	obtener usuario
 	public User getUser(String username) {
-		User user = userRepository.getReferenceById(username);
+		User user = userRepository.findById(username).orElse(null);
 		return user;
 	}
 	

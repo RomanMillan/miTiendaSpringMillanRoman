@@ -23,7 +23,7 @@ public class ElementService {
 	
 //	obtener elemento
 	public Element getElement(String elementname) {
-		Element element = elementRepository.getReferenceById(elementname);
+		Element element = elementRepository.findById(elementname).orElse(null);
 		return element;
 	}
 	

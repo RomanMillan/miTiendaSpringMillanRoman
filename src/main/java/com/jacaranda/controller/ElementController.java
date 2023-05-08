@@ -36,8 +36,13 @@ public class ElementController {
 	
 	@PostMapping("/elementAddSubmit")
 	public String elementAddSubmit(@ModelAttribute("newUser") Element element){
-		elementService.save(element);
-		return "elementAdded";
+			Element elementCheck = elementService.getElement(element.getElementname());
+		if(elementCheck != null) {
+			elementService.save(element);
+			return "elementAdded";			
+		}else {
+			return "errorElement";
+		}
 	}
 	
 	
@@ -45,14 +50,12 @@ public class ElementController {
 	@GetMapping("/articulo/delete/{elementname}")
 	public String elementDelete(Model model, @PathVariable("elementname") String elementname){
 		Element element = elementService.getElement(elementname);
-		try {
-//			compruebo que existe el usuario, buscando un dato,
-//			si este no existe saltará la excepción
+		if(element.getElementname() != null) {
 			element.getElementname();
 			model.addAttribute("deleteElement", element);
 			return "elementDelete";			
-		}catch (Exception e) {
-			return "errorUser";
+		}else {
+			return "errorElement";
 		}
 	}
 	
@@ -67,8 +70,12 @@ public class ElementController {
 	@GetMapping("/articulo/update/{elementname}")
 	public String elementUpdate(Model model, @PathVariable("elementname") String elementname){
 		Element element = elementService.getElement(elementname);
-		model.addAttribute("updateElement",element);
-		return "elementUpdate";
+		if(element.getElementname() != null) {
+			model.addAttribute("updateElement",element);
+			return "elementUpdate";			
+		}else {
+			return "errorElement";
+		}
 	}
 	
 	@PostMapping("/elementUpdateSubmit")
