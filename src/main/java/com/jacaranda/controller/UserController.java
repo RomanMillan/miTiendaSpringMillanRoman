@@ -32,10 +32,8 @@ public class UserController {
 		//List<User> userList = userService.getUserList();
 		User userCheck = userService.getUser(user.getUsername());
 		if (userCheck != null) {
-			//Existe
-			return "errorUser";
+			return "errorUserAdd";
 		}else {
-			// nO existe
 			userService.save(user);
 			return "userAdded";
 		}
@@ -69,8 +67,12 @@ public class UserController {
 	@GetMapping("/usuario/update/{username}")
 	public String userUpdate(Model model, @PathVariable("username") String username){
 		User user = userService.getUser(username);
-		model.addAttribute("updateUser",user);
-		return "userUpdate";
+		if(user != null) {
+			model.addAttribute("updateUser",user);
+			return "userUpdate";			
+		}else {
+			return "errorUser";
+		}
 	}
 	
 	@PostMapping("/userUpdateSubmit")
@@ -83,8 +85,12 @@ public class UserController {
 	@GetMapping("/usuario/admin/{username}")
 	public String userAdmin(Model model, @PathVariable("username") String username){
 		User user = userService.getUser(username);
-		model.addAttribute("user",user);
-		return "userAdmin";
+		if(user != null) {			
+			model.addAttribute("user",user);
+			return "userAdmin";
+		}else {
+			return "errorUser";
+		}
 	}
 	
 //	mostrar lista de usuarios

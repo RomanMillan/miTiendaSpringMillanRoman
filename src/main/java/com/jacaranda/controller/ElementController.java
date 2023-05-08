@@ -41,7 +41,7 @@ public class ElementController {
 			elementService.save(element);
 			return "elementAdded";			
 		}else {
-			return "errorElement";
+			return "errorElementAdd";
 		}
 	}
 	
@@ -51,7 +51,6 @@ public class ElementController {
 	public String elementDelete(Model model, @PathVariable("elementname") String elementname){
 		Element element = elementService.getElement(elementname);
 		if(element.getElementname() != null) {
-			element.getElementname();
 			model.addAttribute("deleteElement", element);
 			return "elementDelete";			
 		}else {
@@ -70,8 +69,10 @@ public class ElementController {
 	@GetMapping("/articulo/update/{elementname}")
 	public String elementUpdate(Model model, @PathVariable("elementname") String elementname){
 		Element element = elementService.getElement(elementname);
-		if(element.getElementname() != null) {
+		if(element != null) {
+			List<Category> categoryList = categoryService.getCategoryList();
 			model.addAttribute("updateElement",element);
+			model.addAttribute("categoryList",categoryList);
 			return "elementUpdate";			
 		}else {
 			return "errorElement";

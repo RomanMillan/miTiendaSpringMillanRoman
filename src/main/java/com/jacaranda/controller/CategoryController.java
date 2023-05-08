@@ -20,7 +20,7 @@ public class CategoryController {
 	CategoryService categoryService;
 	
 //	añadir category 
-	@GetMapping("/category/add")
+	@GetMapping("/categoria/add")
 	public String categoryAdd(Model model){
 		Category category = new Category();
 		model.addAttribute("newCategory",category);
@@ -29,25 +29,46 @@ public class CategoryController {
 	
 	@PostMapping("/categoryAddSubmit")
 	public String categoryAddSubmit(@ModelAttribute("newUser") Category category){
-		categoryService.save(category);
-		return "categoryAdded";
+		Category categorycheck = categoryService.getCategory(category.getCategoryname());
+		if(categorycheck == null) {
+			categoryService.save(category);
+			return "categoryAdded";			
+		}else {
+			return "errorCategoryAdd";
+		}
 	}
 	
 	
 //	borrar category
-	@GetMapping("/category/delete/{categoryname}")
+	@GetMapping("/categoria/delete/{categoryname}")
 	public String categoryDelete(Model model, @PathVariable("categoryname") String categoryname){
 		Category category = categoryService.getCategory(categoryname);
-		categoryService.delete(category);
-		return "categoryDelete";
+		if(category != null) {
+			model.addAttribute("deleteCategory", category);
+			return "categoryDelete";			
+		}else {
+			return "errorCategory";
+		}
 	}
 	
+	@PostMapping("/categoryDeleteSubmit")
+	public String categoryDeleteSubmit(@ModelAttribute("deleteCategory") Category category){
+		categoryService.delete(category);
+		return "categoryDeleted";
+	}
+	
+	
+	
 //	actualizar category
-	@GetMapping("/category/update/{categoryname}")
+	@GetMapping("/categoria/update/{categoryname}")
 	public String categoryUpdate(Model model, @PathVariable("categoryname") String categoryname){
 		Category category = categoryService.getCategory(categoryname);
-		model.addAttribute("updateCategory",category);
-		return "categoryUpdate";
+		if(category != null) {
+			model.addAttribute("updateCategory",category);
+			return "categoryUpdate";			
+		}else {
+			return "errorCategory";
+		}
 	}
 	
 	@PostMapping("/categoryUpdateSubmit")
@@ -58,7 +79,7 @@ public class CategoryController {
 	
 	
 //	mostrar lista de categorias
-	@GetMapping("/category/list")
+	@GetMapping("/categoria/list")
 	public String categoryList(Model model){
 		List<Category> listCategory = categoryService.getCategoryList();
 		model.addAttribute("listCategory", listCategory);

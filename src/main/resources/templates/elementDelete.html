@@ -34,24 +34,24 @@
 				<div class="form-row">
 					<form th:action="@{/elementDeleteSubmit}" method="post" th:object="${deleteElement}">
 						<label for="validationServer01">Marca</label>
-						<input class="form-control" id="validationCustom01" type="text" name="categoryObj" th:value="*{categoryObj.categoryname}" th:fild="*{categoryObj.categoryname}" readonly>
+						<input class="form-control" id="validationCustom01" type="text" name="categoryObj" th:value="*{categoryObj.categoryname}" th:field="*{categoryObj.categoryname}" readonly>
 						<br>
 						<label for="validationServer02">Modelo</label>
-						<input class="form-control" id="validationCustom02" type="text" name="elementname" th:value="*{elementname}" th:fild="*{elementname}" readonly>
+						<input class="form-control" id="validationCustom02" type="text" name="elementname" th:value="*{elementname}" th:field="*{elementname}" readonly>
 						<br>
 						<label for="validationServer03">descripción</label>
-						<input class="form-control" id="validationCustom03" type="text" name="description" th:value="*{description}" th:fild="*{description}" readonly>
+						<input class="form-control" id="validationCustom03" type="text" name="description" th:value="*{description}" th:field="*{description}" readonly>
 						<br>
 						<label for="validationServer04">Stock</label>
-						<input class="form-control" id="validationCustom04" type="number" name="stock" th:value="*{stock}" th:fild="*{stock}" readonly>
+						<input class="form-control" id="validationCustom04" type="number" name="stock" th:value="*{stock}" th:field="*{stock}" readonly>
 						<br>
 						<label for="validationServer05">Precio</label>
-						<input class="form-control" id="validationCustom05" type="number" name="price" th:value="*{price}" th:fild="*{price}" readonly>
+						<input class="form-control" id="validationCustom05" type="number" name="price" th:value="*{price}" th:field="*{price}" readonly>
 						<br>
-						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteUser" data-bs-whatever="@h">Borrar</button>
+						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteElement" data-bs-whatever="@h">Borrar</button>
 
 				        <!-- modal oculto -->
-				        <div class="modal fade" id="deleteUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				        <div class="modal fade" id="deleteElement" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				            <div class="modal-dialog">
 				                <div class="modal-content">
 				                    <div class="modal-header">

@@ -22,7 +22,7 @@ public class CategoryService {
 	
 //	obtener categoria
 	public Category getCategory(String categoryname) {
-		Category category = categoryRepository.getReferenceById(categoryname);
+		Category category = categoryRepository.findById(categoryname).orElse(null);
 		return category;
 	}
 	
