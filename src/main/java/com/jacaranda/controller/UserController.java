@@ -19,6 +19,11 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+	@GetMapping("/login")
+	public String logiin() {
+		return "login";
+	}
+	
 //	añadir usuario 
 	@GetMapping("/usuario/add")
 	public String userAdd(Model model){

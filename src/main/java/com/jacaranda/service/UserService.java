@@ -2,7 +2,12 @@ package com.jacaranda.service;
 
 import java.util.List;
 
+import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.core.userdetails.UserDetails;
 //import org.springframework.security.core.userdetails.UserDetailsService;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,7 +17,7 @@ import com.jacaranda.model.User;
 import com.jacaranda.repository.UserRepository;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService{
 
 	@Autowired
 	UserRepository userRepository;
@@ -32,6 +37,9 @@ public class UserService {
 //	guardar usuario
 	public boolean save(User user) {
 		boolean success = false;
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
 		User userSaved = userRepository.save(user);
 		if(userSaved != null ) {
 			success = true;
@@ -45,11 +53,16 @@ public class UserService {
 		userRepository.delete(user);
 	}
 
+//	metodo implementado del UserDetailsService
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User user = userRepository.findById(username).orElse(null);
+		if(user == null) {
+			throw new UsernameNotFoundException("Usuario no existe en la BD");
+		}else {			
+			return user;
+		}
+	}
 
-//	@Override
-//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-////		devolver el usuario 
-//		return null;
-//	}
 	
 }

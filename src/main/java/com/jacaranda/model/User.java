@@ -1,7 +1,13 @@
 package com.jacaranda.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -10,7 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="userdb")
-public class User {
+public class User implements UserDetails{
 
 	@Id
 	private String username;
@@ -137,6 +143,47 @@ public class User {
 			return false;
 		User other = (User) obj;
 		return Objects.equals(username, other.username);
+	}
+
+// metodos importados del UserDetails
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+		if(this.administrator) {			
+			authorities.add(new SimpleGrantedAuthority("ADMIN"));
+		}else {
+			authorities.add(new SimpleGrantedAuthority("USER"));
+		}
+
+		 return authorities;
+	}
+
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 	
 
