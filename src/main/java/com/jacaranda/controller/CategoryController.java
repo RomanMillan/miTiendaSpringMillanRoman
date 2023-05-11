@@ -1,14 +1,17 @@
 package com.jacaranda.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jacaranda.model.Category;
 import com.jacaranda.service.CategoryService;
@@ -80,8 +83,12 @@ public class CategoryController {
 	
 //	mostrar lista de categorias
 	@GetMapping("/categoria/list")
-	public String categoryList(Model model){
-		List<Category> listCategory = categoryService.getCategoryList();
+	public String categoryList(Model model, @RequestParam Optional<Integer> numPage, @RequestParam Optional<Integer> amountElements, @RequestParam Optional<String>sortField, @RequestParam Optional<String> searchField){
+		Page<Category> listCategory = categoryService.getCategoryList(numPage.orElse(1),amountElements.orElse(10), sortField.orElse("categoryname"), searchField.orElse(null));
+		model.addAttribute("currentPage",numPage.orElse(1));
+		model.addAttribute("totalPages",listCategory.getTotalPages());
+		model.addAttribute("totalItems",listCategory.getTotalElements());
+		model.addAttribute("listElement", listCategory.getContent());
 		model.addAttribute("listCategory", listCategory);
 		return "categoryList";
 	}

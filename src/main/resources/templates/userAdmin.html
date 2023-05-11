@@ -29,20 +29,13 @@
 			<div class="row">
 				<h1 class="display-1">Actualizar usuario</h1>
 				<div class="form-row">
-					<form th:action="@{/userUpdateSubmit}" method="post" th:object="${updateUser}">
+					<form th:action="@{/userAdminSubmit}" method="post" th:object="${userAdmin}">
 						<label for="validationServer01">Nombre usuario</label>
 						<input class="form-control" id="validationCustom01" type="text" name="username" th:value="*{username}" th:field="*{username}" required="required" readonly>
 						<br>
-						<label for="validationServer02">Contraseña</label>
-						<input class="form-control" id="validationCustom02" type="password" name="password" th:value="*{password}"  th:field="*{password}" required="required">
-						<br>
-						<label for="validationServer03">Nombre Real</label>
-						<input class="form-control" id="validationCustom03" type="text" name="realusername" th:value="*{realusername}" th:field="*{realusername}" required="required">
-						<br>
-						<label for="validationServer04">Correo Electrónico</label>
-						<input class="form-control" id="validationCustom04" type="email" name="email" th:value="*{email}"  th:field="*{email}" required="required">
-						<br>
-						<button class="btn btn-primary" type="submit">Actualizar</button> 
+						<label for="validationServer02">administrator</label>
+						<input class="form-control" id="validationCustom02" type="text" name="administrator" th:value="*{administrator}"  th:field="*{administrator}" readonly>
+						<button class="btn btn-primary" type="submit">Cambiar</button> 
 					</form>
 				</div>
 			</div>

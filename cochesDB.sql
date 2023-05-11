@@ -49,7 +49,7 @@ CREATE TABLE miTiendaSpringMillanRoman.receipt(
 
 
 
-/*contraseña para admin : admin // los demás: 1234 = 45337ab528ab456381fd0fe311633a6b */
+/*contraseña para 123 =  $2a$10$V13mNk8tltxvZxxOD5/OZ.iDyuDnw1iOyW4otNalX6pFt.TLv0jwq*/
 insert into miTiendaSpringMillanRoman.userdb (username, password, realusername, email, administrator) values ('admin', 'admin', 'admin', 'admin@gmail.com', true);
 insert into miTiendaSpringMillanRoman.userdb (username, password, realusername, email, administrator) values ('Eli', '1234', 'Elisa', 'eli@gmail.com', false);
 insert into miTiendaSpringMillanRoman.userdb (username, password, realusername, email, administrator) values ('Manu23', '1234', 'Manuel','manu@gmail.com', false);

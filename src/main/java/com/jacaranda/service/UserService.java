@@ -53,6 +53,15 @@ public class UserService implements UserDetailsService{
 		userRepository.delete(user);
 	}
 
+//	modificar el campo admin
+	public void changeAdmin(User user) {
+		if(user.isAdministrator()) {			
+			user.setAdministrator(false);
+		}else {
+			user.setAdministrator(true);
+		}
+	}
+	
 //	metodo implementado del UserDetailsService
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

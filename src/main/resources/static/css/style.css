@@ -69,12 +69,17 @@ form{
 /* INDEX RG */
 
 #holi{
-    margin-top: 7%;
+    margin: 6%;
     background-color: DarkTurquoise;
     border-radius: 2rem !important;
-    margin-bottom: 5%;
+    /* margin-bottom: 5%; */
     box-shadow: 2px 2px 15px gray;
-    margin-left: 20%; 
+    margin-left: 20%;
+    margin-right: 20%; 
+}
+
+.enlacePagMio{
+	color: red;
 }
 
 /* END INDEX RG */

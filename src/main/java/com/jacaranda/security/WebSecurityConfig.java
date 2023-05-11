@@ -48,14 +48,49 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests((requests) -> {
-			requests.requestMatchers("/usuario/add").permitAll();
-			requests.requestMatchers("/userAddSubmit").permitAll();
+			requests.requestMatchers("/usuario/add").permitAll()
+			.requestMatchers("/").permitAll()
+			.requestMatchers("/userAddSubmit").permitAll()
+
+//			Acceso solo a los administradores
+//			category access (add, update, delete)
+			.requestMatchers("/categoria/add").hasAnyAuthority("ADMIN")
+			.requestMatchers("/categoryAddSubmit").hasAnyAuthority("ADMIN")
+			.requestMatchers("/categoria/delete/**").hasAnyAuthority("ADMIN")
+			.requestMatchers("/categoryDeleteSubmit").hasAnyAuthority("ADMIN")
+			.requestMatchers("/categoria/update/**").hasAnyAuthority("ADMIN")
+			.requestMatchers("/categoryUpdateSubmit").hasAnyAuthority("ADMIN")
+//			element access (add, update, delete)
+			.requestMatchers("/articulo/add").hasAnyAuthority("ADMIN")
+			.requestMatchers("/elementAddSubmit").hasAnyAuthority("ADMIN")
+			.requestMatchers("/articulo/delete/**").hasAnyAuthority("ADMIN")
+			.requestMatchers("/elementDeleteSubmit").hasAnyAuthority("ADMIN")
+			.requestMatchers("/articulo/update/**").hasAnyAuthority("ADMIN")
+			.requestMatchers("/elementUpdateSubmit").hasAnyAuthority("ADMIN")
+//			user access (get, update, delete)
+			.requestMatchers("/usuario/list").hasAnyAuthority("ADMIN")
+			.requestMatchers("/usuario/admin/**").hasAnyAuthority("ADMIN")
+			.requestMatchers("/userAdminSubmit").hasAnyAuthority("ADMIN")
+			.requestMatchers("/usuario/delete/**").hasAnyAuthority("ADMIN")
+			.requestMatchers("/userDeleteSubmit").hasAnyAuthority("ADMIN")
+			
+//			Acceso solo rol USER
+			.requestMatchers("/usuario/update/**").hasAnyAuthority("USER")
+			.requestMatchers("/userUpdateSubmit").hasAnyAuthority("USER")
+			
+//			Acceso a todos los registrados
+			.requestMatchers("/articulo/list").authenticated()
+			.requestMatchers("/categoria/list").authenticated()
+
+//          Acceso a cualquier request
+			.anyRequest().permitAll();
+			
+			
 		})
-	.formLogin((form) -> form
-			.loginPage("/login")
-			.permitAll())
-			.logout((logout) -> logout.permitAll());
-			return http.build();
-	}
-	
+		.formLogin((form) -> form
+				.loginPage("/login")
+				.permitAll())
+				.logout((logout) -> logout.permitAll());
+				return http.build();
+		}
 }

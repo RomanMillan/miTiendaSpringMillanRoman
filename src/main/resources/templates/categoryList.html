@@ -21,7 +21,7 @@
 		  		</div>
 	
 		  		<div class="col-md-3 pruClose">
-			  		<img alt="purchaseImg" src="img/purchase.png">
+			  		<img alt="purchaseImg" src="/img/purchase.png">
 			  		<a href='purchase.jsp' class="btn btn-info a-closeSession">#</a>
 			  		<a href='index.jsp' class="btn btn-danger a-closeSession">Cerrar Sesión</a>
 		  		</div>
@@ -30,35 +30,89 @@
 	
 		<!-- MAIN -->
 			
-			<div class="container">
-				<!-- second header -->
-				<div class="row">
-					<h1 class="display-1">Lista de Marcas</h1>
-					<div class="col-sm-11">
-						<a href="categories.jsp" class="btn btn-secondary">Atrás</a>
-					</div>
-					
+
+	<div class="container">
+			<div class="row">			
+				<h1 class="display-1">Todas Nuestras Marcas</h1>
+				<h3 class="display-3">Marcas con personalidad</h3>
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-2">
+					<form th:action="@{'/articulo/list" method="get">
+						<button class="btn btn-primary">Ver todos los modelos</button>
+					</form>
+				</div>
+				<div class="col">
+					<a href="listPurchase.jsp" class="btn btn-info">Ver mis compras</a>
+				</div>
+
+				<!-- añadir categoria -->
+				<div class="col">
+					<a href="addCategory.jsp" class="btn btn-dark">Añadir Marca</a>
+				</div>
+				<div class="col">
+					<form th:action="@{/categoria/list}">
+						 Buscar: <input type="text" name="searchField" id="searchField" size="10" th:value="${searchField}" required />
+						 <button type="submit" value="buscar">Buscar</button>
+						 <button type="button" value="limpiar" id="btnClear" onclick="clearSearch()">Limpiar </button>
+					</form>
+					<script type="text/javascript">
+						 function clearSearch() {
+						 window.location = "[[@{/categoria/list}]]";
+						 }
+					</script>			
 				</div>
 				
-				<br>
-				<!-- list -->
-				<div class="row">
-					<table class="table table-striped">
-						<thead class="thead-dark">
-							<tr>
-								<th scope="col">Marca</th>
-							    <th scope="col">descripción</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="category: ${listCategory}">
-				 				<td th:text="${category.categoryname}"></td> 
-								<td th:text="${category.description}"></td>
-							</tr>
-						</tbody>
-					</table>		
-				</div>
-			</div>	
+			</div>
+			
+			<div class="row">
+				<!-- LAS TARJETAS DE CATEGORIA -->	
+				<div class="card" th:each="category: ${listCategory}" style="width: 18rem">
+				  <img class="card-img-top" src="/img/marcas.jpg" alt="Imagen marca">
+				  <div class="card-body">		
+				    <h5 class="card-title" th:text="${category.categoryname}"></h5>
+				    <p class="card-text" th:text="${category.description}"><</p>
+				    
+				    <a th:href="@{'/articulo/list?categoryId=' + ${category.categoryname}}">
+				    	<button class="btn btn-primary">Modelos</button>
+				    </a>
+				    
+				    <!-- <form th:action="@{'/articulo/list/'+ ${category.element.elementname}}" method="post">
+						<button class="btn btn-primary">Modelo</button>
+					</form> -->
+				    <!-- <a href='#' class="btn btn-primary enlacePagMio">Modelos</a> -->
+				  </div>
+				</div>	
+				
+			</div>
+
+	
+			<!-- Menú de paginación -->
+			<div>
+				Cantidad: <!-- <a th:text="${totalItems}" /> -->
+				<a class="enlacePagMio" th:href="@{'list?amountElements=' + ${totalItems}}" th:text="${totalItems}"/>  
+				
+				<a class="enlacePagMio" th:if="${currentPage > 1}" th:href="@{list?numPage=1}">Primero</a> 
+				<span th:unless="${currentPage > 1}">Primero</span> 
+				
+				<a class="enlacePagMio" th:if="${currentPage > 1}" th:href="@{'list?numPage=' + ${currentPage - 1}}">Anterior</a>
+				<span th:unless="${currentPage > 1}">Anterior</span> 
+				
+				<span th:each="i: ${#numbers.sequence(1, totalPages)}"> 
+				<a class="enlacePagMio" th:if="${currentPage != i}" th:href="@{'list?numPage=' + ${i}}" th:text="${i}"></a> 
+				<span th:unless="${currentPage != i}"> <a th:text="${i}"></a>
+				</span> &nbsp;</span> 
+				
+				<a class="enlacePagMio" th:if="${currentPage < totalPages}" th:href="@{'list?numPage=' + ${currentPage + 1}}">Siguente</a>
+				<span th:unless="${currentPage < totalPages}">Siguente</span> 
+				
+				<a class="enlacePagMio" th:if="${currentPage < totalPages}" th:href="@{'list?numPage=' + ${totalPages}}">Último</a> 
+				<span th:unless="${currentPage < totalPages}">Último</span>
+			</div>
+						
+		</div>
+
 			<!-- END MAIN -->
 			
 		<!-- FOOTER -->

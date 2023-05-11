@@ -3,6 +3,10 @@ package com.jacaranda.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.jacaranda.model.Category;
@@ -15,9 +19,14 @@ public class CategoryService {
 	CategoryRepository categoryRepository;
 	
 //	obtener lista de categoria
-	public List<Category> getCategoryList() {
-		List<Category> categoryList = categoryRepository.findAll();
-		return categoryList;
+	public Page<Category> getCategoryList(int numPage, int amountElements, String sortField, String searchField) {
+		Pageable pageable = PageRequest.of(numPage -1, amountElements, Sort.by(sortField).ascending());
+		if(searchField != null) {
+			return categoryRepository.findByCategorynameLike("%"+ searchField + "%", pageable);
+		}else {			
+			return categoryRepository.findAll(pageable);
+		}
+		
 	}
 	
 //	obtener categoria

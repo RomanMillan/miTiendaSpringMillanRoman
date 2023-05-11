@@ -19,8 +19,9 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+//	para redirigir a la pagina de login propia
 	@GetMapping("/login")
-	public String logiin() {
+	public String login() {
 		return "login";
 	}
 	
@@ -34,7 +35,6 @@ public class UserController {
 	
 	@PostMapping("/userAddSubmit")
 	public String userAddSubmit(@ModelAttribute("newUser") User user){
-		//List<User> userList = userService.getUserList();
 		User userCheck = userService.getUser(user.getUsername());
 		if (userCheck != null) {
 			return "errorUserAdd";
@@ -86,17 +86,24 @@ public class UserController {
 		return "userUpdated";
 	}
 	
-//	mostar usuario 
+//	cambiar Admin 
 	@GetMapping("/usuario/admin/{username}")
 	public String userAdmin(Model model, @PathVariable("username") String username){
 		User user = userService.getUser(username);
 		if(user != null) {			
-			model.addAttribute("user",user);
+			model.addAttribute("userAdmin",user);
 			return "userAdmin";
 		}else {
 			return "errorUser";
 		}
 	}
+	
+	@PostMapping("/userAdminSubmit")
+	public String userAdminSubmit(@ModelAttribute("userAdmin") User user){
+		userService.changeAdmin(user);
+		return "userAdminChanged";
+	}
+	
 	
 //	mostrar lista de usuarios
 	@GetMapping("/usuario/list")
@@ -106,13 +113,14 @@ public class UserController {
 		return "userList";
 	}
 
+	
 
 	//hacer login
 	@GetMapping("/")
 	public String isValid(Model model){
 		User userLogin = new User();
 		model.addAttribute("userLogin",userLogin);
-		return "index";
+		return "login";
 	}
 
 }
