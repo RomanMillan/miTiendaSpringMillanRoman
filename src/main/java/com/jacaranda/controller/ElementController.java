@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jacaranda.model.Category;
 import com.jacaranda.model.Element;
+import com.jacaranda.model.User;
 import com.jacaranda.service.CategoryService;
 import com.jacaranda.service.ElementService;
 
@@ -112,26 +114,29 @@ public class ElementController {
 				@RequestParam Optional<String> searchField,
 				@RequestParam Optional<String> categoria
 				){
-
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Page<Element> listElement;
 		if (categoria.isPresent()) {
 			listElement = elementService.getElementList(
 					numPage.orElse(1),
 					amountElements.orElse(10), 
 					sortField.orElse("elementname"), 
-					searchField.orElse(null),null);	
+					searchField.orElse(null),
+					null);	
 		}else {
 			listElement = elementService.getElementList(
 					numPage.orElse(1),
 					amountElements.orElse(10), 
 					sortField.orElse("elementname"), 
-					searchField.orElse(null), categoria.orElse(null));
+					searchField.orElse(null), 
+					categoria.orElse(null));
 		}
 		
 		model.addAttribute("currentPage",numPage.orElse(1));
 		model.addAttribute("totalPages",listElement.getTotalPages());
 		model.addAttribute("totalItems",listElement.getTotalElements());
 		model.addAttribute("listElement", listElement.getContent());
+		model.addAttribute("user",user);
 		return "elementList";
 	}
 }

@@ -19,14 +19,15 @@
 			<span class="navbar-brand mb-0 h1">Todo Coches</span>
 		</div>
 		<div class="col-md-6 welcome">
-			<span class="navbar-brand mb-0 h1">Juanillo</span>
+			<span class="navb ar-brand mb-0 h1" th:text="${user.username}">#</span>
 		</div>
 
 		<div class="col-md-3 pruClose">
-			<img alt="purchaseImg" src="img/purchase.png"> <a
-				href='purchase.jsp' class="btn btn-info a-closeSession">#</a> <a
-				href='' class="btn btn-danger a-closeSession">Cerrar
-				Sesión</a>
+			<img alt="purchaseImg" src="img/purchase.png"> 
+			<a href='#' class="btn btn-info a-closeSession">#</a> 
+			<form th:action="@{'/logout'}" method="Post">
+		  		<button class="btn btn-danger" type="submit">Cerrar Sesión</button>
+		  	</form>
 		</div>
 	</nav>
 	<!-- END HEADER -->
@@ -53,7 +54,7 @@
 		<div class="row">
 			<h1 class="display-1">Lista de modelos</h1>
 			<div class="col-sm-11">
-				<a href="categories.jsp" class="btn btn-secondary">Atrás</a>
+				<a th:href="@{/categoria/list}" class="btn btn-secondary">Atrás</a>
 			</div>
 
 		</div>
@@ -88,6 +89,12 @@
 						<td th:text="${element.description}"></td>
 						<td th:text="${element.stock}"></td>
 						<td th:text="${element.price}"></td>
+						<td th:if="${user.administrator}">
+							<a th:href="@{/articulo/update/} + ${element.elementname}" class="btn btn-warning">Modificar</a>
+						</td>
+						<td th:if="${user.administrator}">
+							<a th:href="@{/articulo/delete/} + ${element.elementname}" class="btn btn-danger">Borrar</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>

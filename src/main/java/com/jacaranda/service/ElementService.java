@@ -33,12 +33,9 @@ public class ElementService {
 				amountElements, 
 				Sort.by(sortField).ascending());
 		
-		
 		if (categoria != null) {
 			Category category = categoryService.getCategory(categoria);
 			return elementRepository.findByCategoryObj(category, pageable);
-			
-			
 		}
 		if(searchField != null) {
 			return elementRepository.findByElementnameLike("%"+ searchField + "%", pageable);
@@ -46,27 +43,6 @@ public class ElementService {
 			return elementRepository.findAll(pageable);
 		}
 	}
-	
-// Obtener por categorias
-//public Page<Element> findAllByCategory(
-//		int pageNum, 
-//		int pageSize, 
-//		String sortField, 
-//		String stringFind, 
-//		int catId){
-//		
-//	Pageable pageable = PageRequest.of(
-//			pageNum - 1, 
-//			pageSize, 
-//			Sort.by(sortField).ascending());
-//	
-//	if(stringFind.equals("")) {
-//		return elementRepository.findByCategory(catId, pageable);
-//	}else {
-//		return elementRepository.findByCategoryCatIdAndNameLike(catId, "%" + stringFind + "%", pageable); 
-//	}
-//		
-//}
 	
 	
 //	obtener elemento

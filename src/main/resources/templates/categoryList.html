@@ -16,15 +16,15 @@
 		  		<div class="col-md-3">
 		  			<span class="navbar-brand mb-0 h1">Todo Coches</span>
 		  		</div>
-		  		<div class="col-md-6 welcome"> <!-- Cuidado esto da error lo del user.usernmae -->
-			  		<span class="navbar-brand mb-0 h1" th:text="${user.username}"></span>
+		  		<div class="col-md-6 welcome">
+			  		<span class="navbar-brand mb-0 h1" th:text="${user.username}">#</span>
 		  		</div>
 	
 		  		<div class="col-md-3 pruClose">
 			  		<img alt="purchaseImg" src="/img/purchase.png">
-			  		<a href='purchase.jsp' class="btn btn-info a-closeSession">#</a>
+			  		<a href='#' class="btn btn-info a-closeSession">#</a>
 			  		<form th:action="@{'/logout'}" method="Post">
-			  			<button type="submit">Cerrar Sesión</button>
+			  			<button class="btn btn-danger" type="submit">Cerrar Sesión</button>
 			  		</form>
 		  		</div>
 			</nav> 
@@ -41,17 +41,19 @@
 			
 			<div class="row">
 				<div class="col-sm-2">
-				 	<form th:action="@{'/articulo/list'}" method="get">
+				 	<form th:action="@{/articulo/list}" method="get">
 						<button class="btn btn-primary">Ver todos los modelos</button>
 					</form> 
+<!-- 					<a th:href="@{articulo/list" class="btn btn-dark">Añadir Marca</a> -->
 				</div>
 				<div class="col">
-					<a href="listPurchase.jsp" class="btn btn-info">Ver mis compras</a>
+					<a href="#" class="btn btn-info">Ver mis compras</a>
 				</div>
 
 				<!-- añadir categoria -->
-				<div class="col">
-					<a href="addCategory.jsp" class="btn btn-dark">Añadir Marca</a>
+
+				<div th:if="${user.administrator}" class="col">
+					<a th:href="@{/categoria/add}" class="btn btn-dark">Añadir Marca</a>
 				</div>
 				<div class="col">
 					<form th:action="@{/categoria/list}">
@@ -82,9 +84,12 @@
 				    
 				    <form th:action="@{'/articulo/list/?categoria=${category.categoryname}'}" method="post">
 				    	<input text th:value="${category.categoryname}" hidden>
-						<button class="btn btn-primary">Modelo</button>
-					</form> -->
-				    <!-- <a href='#' class="btn btn-primary enlacePagMio">Modelos</a> -->
+						<button class="btn btn-primary">Modelos</button>
+					</form> 
+				    <div th:if="${user.administrator}" class="col">
+						<a th:href="@{/categoria/update/} + ${category.categoryname}" class="btn btn-warning">Modificar</a>
+						<a th:href="@{/categoria/delete/} + ${category.categoryname}" class="btn btn-danger">Borrar</a>
+					</div>
 				  </div>
 				</div>	
 				
