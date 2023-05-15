@@ -89,7 +89,7 @@ public class WebSecurityConfig {
 		})
 		.formLogin((form) -> form
 				.loginPage("/login")
-				.permitAll())
+				.permitAll().defaultSuccessUrl("/categoria/list"))
 				.logout((logout) -> logout.permitAll());
 				return http.build();
 		}

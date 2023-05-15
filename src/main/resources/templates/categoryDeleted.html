@@ -35,7 +35,9 @@
 				</form>
 			</div>
 			
-			<a href='index.jsp' class="btn btn-success">volver</a>
+			<form th:action="@{/categoria/list}" method="get">
+					<button class="btn btn-secondary">Atrás</button>
+			</form>
 		</div>
 				
 		<!-- END MAIN -->

@@ -10,8 +10,7 @@ import com.jacaranda.model.Element;
 
 public interface ElementRepository extends JpaRepository<Element, String> {
 	public Page<Element> findByElementnameLike(String keyword,Pageable pageable);
+	//public Page<Element> findByCategoryAndSearchField(Category categoryId, String keyword, Pageable pageable);
 	
-	public Page<Element> findByCategoryAndSearchField(Category categoryId, String keyword, Pageable pageable);
-	
-	public Page<Element> findByCategory(Category categoryId, Pageable pageable);
+	public Page<Element> findByCategoryObj(Category categoryId, Pageable pageable);
 }

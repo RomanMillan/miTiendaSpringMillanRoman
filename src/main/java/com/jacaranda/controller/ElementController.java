@@ -45,7 +45,7 @@ public class ElementController {
 	@PostMapping("/elementAddSubmit")
 	public String elementAddSubmit(@ModelAttribute("newUser") Element element){
 			Element elementCheck = elementService.getElement(element.getElementname());
-		if(elementCheck != null) {
+		if(elementCheck == null) {
 			elementService.save(element);
 			return "elementAdded";			
 		}else {
@@ -110,14 +110,24 @@ public class ElementController {
 				@RequestParam Optional<Integer> amountElements, 
 				@RequestParam Optional<String>sortField, 
 				@RequestParam Optional<String> searchField,
-				@RequestParam Optional<String> categoryId){
+				@RequestParam Optional<String> categoria
+				){
 
-		Page<Element> listElement = elementService.getElementList(
-				numPage.orElse(1),
-				amountElements.orElse(10), 
-				sortField.orElse("elementname"), 
-				searchField.orElse(null),
-				categoryId.orElse(null));
+		Page<Element> listElement;
+		if (categoria.isPresent()) {
+			listElement = elementService.getElementList(
+					numPage.orElse(1),
+					amountElements.orElse(10), 
+					sortField.orElse("elementname"), 
+					searchField.orElse(null),null);	
+		}else {
+			listElement = elementService.getElementList(
+					numPage.orElse(1),
+					amountElements.orElse(10), 
+					sortField.orElse("elementname"), 
+					searchField.orElse(null), categoria.orElse(null));
+		}
+		
 		model.addAttribute("currentPage",numPage.orElse(1));
 		model.addAttribute("totalPages",listElement.getTotalPages());
 		model.addAttribute("totalItems",listElement.getTotalElements());

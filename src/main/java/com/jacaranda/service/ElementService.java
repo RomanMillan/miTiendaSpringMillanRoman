@@ -27,18 +27,20 @@ public class ElementService {
 				int amountElements, 
 				String sortField, 
 				String searchField,
-				String categoryId) {
+				String categoria) {
 		Pageable pageable = PageRequest.of(
 				numPage -1, 
 				amountElements, 
 				Sort.by(sortField).ascending());
-		if(searchField != null && categoryId != null) {
-			Category cat = categoryService.getCategory(categoryId);
-			return elementRepository.findByCategoryAndSearchField(cat,"%"+ searchField + "%", pageable);
-		}else if(searchField == null && categoryId != null) {
-			Category cat = categoryService.getCategory(categoryId);
-			return elementRepository.findByCategory(cat,pageable);
-		}else if(searchField != null && categoryId == null) {
+		
+		
+		if (categoria != null) {
+			Category category = categoryService.getCategory(categoria);
+			return elementRepository.findByCategoryObj(category, pageable);
+			
+			
+		}
+		if(searchField != null) {
 			return elementRepository.findByElementnameLike("%"+ searchField + "%", pageable);
 		}else {			
 			return elementRepository.findAll(pageable);
